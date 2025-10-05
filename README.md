@@ -120,7 +120,65 @@ Este tipo de direcciones es el <b>más utilizado en la mayoría de las redes</b>
 </p>
 
 
-<h2>IPv6</h2>
+<h2><b>IPv6</b></h2>
 <p>
-El IPv6 (Internet Protocol version 6), 
+El <b>IPv6</b> (Internet Protocol version 6), al igual que <b>IPv4</b>, es un protocolo utilizado para <b>asignar direcciones únicas a los dispositivos electrónicos</b> dentro de una red o subred, con el fin de que puedan <b>identificarse, comunicarse y transferir información</b> entre sí.
 </p>
+
+<p>
+La principal diferencia es que <b>IPv6 utiliza direcciones de 128 bits</b>, en lugar de los 32 bits que usa <b>IPv4</b>. 
+Estas direcciones se dividen en <b>8 grupos de 16 bits</b>, separados por dos puntos (<code>:</code>), y se representan en formato <b>hexadecimal</b>.  
+Un ejemplo común sería: <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>.  
+Gracias a esta estructura, <b>IPv6 permite una cantidad casi ilimitada de direcciones</b>, solucionando la escasez de direcciones que presenta <b>IPv4</b>.  
+Además, ofrece <b>mejoras en seguridad, eficiencia y autoconfiguración</b> dentro de las redes modernas.
+</p>
+
+<h2><b>Comandos usados para IPv4 y IPv6</b></h2>
+
+<div align="center">
+  <p><img width=850 src="https://github.com/user-attachments/assets/0f927a67-6df5-4c3b-b166-9fe46f5205f7"/></p>
+</div>
+
+<p>
+En esta imagen se utiliza el comando <code>ip a</code> para <b>visualizar las direcciones IP del computador</b>.  
+Si se desea mostrar únicamente las direcciones <b>IPv4</b>, se usa el comando <code>ip -4 a</code>.  
+Por otro lado, para ver solo las direcciones <b>IPv6</b>, se emplea el comando <code>ip -6 a</code>, como se observa en la imagen.  
+Estos comandos permiten distinguir fácilmente entre los dos tipos de direcciones IP configuradas en el sistema.
+</p>
+
+<div align="center">
+  <p><img width=850 src="https://github.com/user-attachments/assets/a5dfdc51-2316-4bb1-a2ea-654552e793ca"/></p>
+</div>
+
+<p>
+En esta segunda imagen se muestra la parte final del comando <code>ip -6 a</code>.  
+Además, para visualizar la <b>tabla de enrutamiento</b> específica de cada protocolo, se pueden usar los comandos <code>ip -4 route</code> (para IPv4) y <code>ip -6 route</code> (para IPv6).  
+Finalmente, para <b>verificar la conectividad</b> con un servidor, se puede usar el comando <code>ping</code>.  
+Por ejemplo, para IPv4 sería <code>ping 8.8.8.8</code> (servidor DNS de Google), mientras que para IPv6 se puede usar <code>ping google.com</code>, ya que este dominio soporta direcciones IPv6.
+</p>
+
+<hr>
+
+<div align="center">
+  <p>
+    <em>Tercer Punto</em>
+  </p>
+</div>
+
+<hr>
+
+<h2>Pasos para la instalación de Arch Linux</h2>
+<ol>
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/9115ce50-29b8-442f-8abb-4aefb5dd0cd1"/></p>
+    </div>
+    <p>El primer paso es ir a la pagina oficial de Arch Linux donde aparecera la opcion de descargar la imagen (.iso) del sistema operativo, luego te pide la región que uno desea instalar y la version del sistema operativo, por facilidad     yo puse la mas reciente (v10.01) y listo, la imagen solo pesa 1.4GB, lo cual no es mucho.</p>
+  </li>
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/55b83cec-fd4f-4c18-a9e9-a91e3b97595d"/></p>
+    </div>
+    <p>El siguiente paso es </p>
+  </li>
+</ol>
