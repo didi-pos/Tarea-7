@@ -167,18 +167,153 @@ Por ejemplo, para IPv4 sería <code>ping 8.8.8.8</code> (servidor DNS de Google)
 
 <hr>
 
-<h2>Pasos para la instalación de Arch Linux</h2>
+<h2><b>Pasos para la instalación de Arch Linux</b></h2>
+
 <ol>
   <li><br>
     <div align="center">
       <p><img width=850 src="https://github.com/user-attachments/assets/9115ce50-29b8-442f-8abb-4aefb5dd0cd1"/></p>
     </div>
-    <p>El primer paso es ir a la pagina oficial de Arch Linux donde aparecera la opcion de descargar la imagen (.iso) del sistema operativo, luego te pide la región que uno desea instalar y la version del sistema operativo, por facilidad     yo puse la mas reciente (v10.01) y listo, la imagen solo pesa 1.4GB, lo cual no es mucho.</p>
+    <p>
+      El primer paso es ir a la <b>página oficial de Arch Linux</b>, donde aparece la opción para <b>descargar la imagen (.iso)</b> del sistema operativo.  
+      Luego se selecciona la región donde se desea instalar y la versión del sistema operativo; por facilidad, elegí la más reciente (v10.01).  
+      La imagen pesa aproximadamente <b>1.4 GB</b>, lo cual no es mucho.
+    </p>
   </li>
+
   <li><br>
     <div align="center">
-      <p><img width=850 src="https://github.com/user-attachments/assets/55b83cec-fd4f-4c18-a9e9-a91e3b97595d"/></p>
+      <p><img width=850 src="https://github.com/user-attachments/assets/c56bf092-b92d-47e7-9d7b-662432e4fdc8"/></p>
     </div>
-    <p>El siguiente paso es </p>
+    <p>
+      El siguiente paso, si se quiere instalar como máquina virtual, es tener ya configurado el <b>virtualizador</b>; en mi caso utilicé <b>QEMU</b>.  
+      Aquí se realiza todo el proceso de creación de la VM: seleccionar la ubicación de la imagen <b>(.iso)</b>, el sistema operativo a instalar, la <b>memoria RAM</b> y los <b>núcleos de CPU</b> que se le asignarán.  
+      Con eso listo, se puede iniciar el arranque del booteable y continuar con la instalación.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/516913c7-616f-4c5a-b5d6-e8c94801c46b"/></p>
+    </div>
+    <p>
+      Al iniciar y seleccionar la opción <b>"Arch Linux install"</b>, se abre una <b>terminal</b> desde donde se deben ejecutar los comandos de instalación y configuración.  
+      Esto permite instalar exactamente lo que uno necesita, logrando un sistema operativo más <b>ligero y optimizado</b>.  
+      Sin embargo, también requiere cuidado, ya que es más fácil cometer errores.  
+      En caso de duda, se puede consultar la <b>guía oficial</b> de instalación en la página de Arch Linux.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/ea80567f-5f8a-4cd9-9cbb-e7f2eedc3309"/></p>
+    </div>
+    <p>
+      Luego, con el comando <code>cfdisk /dev/vda</code>, se abre la herramienta para <b>crear la partición</b> donde se instalará Arch Linux.  
+      Aquí se debe elegir el tipo de tabla de particiones (GPT, DOS, SGI o SUN).  
+      La opción más recomendable es <b>DOS</b>, ya que las demás pueden generar errores en algunos casos.  
+      Después, se crea una nueva partición, se guardan los cambios y se sale para continuar con la instalación.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/f3afe47a-c5b8-4f98-893b-cedd3894e907"/></p>
+    </div>
+    <p>
+      Una vez creada la partición, se formatea con <code>mkfs.ext4 /dev/vda1</code>.  
+      Luego se monta el disco con <code>mount /dev/vda1 /mnt</code> para poder configurarlo directamente.  
+      Después se instala el sistema base con el comando:  
+      <code>pacstrap /mnt base linux linux-firmware nano networkmanager grub</code>.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/12438c10-17dd-48b9-ad9b-d5e1f20fb936"/></p>
+    </div>
+    <p>
+      Aquí se puede ver cómo debería aparecer la instalación base.  
+      En mi caso, tuve un error por escribir mal un comando, ya que el <b>teclado por defecto</b> en esta terminal es el <b>US</b> (inglés), porque aún no se ha configurado el idioma.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/01c443a8-ce32-4f27-87c5-42229c0a8523"/></p>
+    </div>
+    <p>
+      Luego se genera el archivo <b>fstab</b> con el comando  
+      <code>genfstab -U /mnt >> /mnt/etc/fstab</code>.  
+      Después, se puede entrar al sistema montado con  
+      <code>arch-chroot /mnt</code> para continuar con la configuración.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/e78d8a19-9fd9-45e0-9aac-42a79671b745"/></p>
+    </div>
+    <p>
+      Una vez dentro del sistema, se configura la <b>zona horaria</b> con los comandos:  
+      <code>ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime</code> y <code>hwclock --systohc</code>.  
+      Luego se instala el <b>bootloader</b> (GRUB), que es el encargado de iniciar los sistemas operativos.  
+      Para instalarlo junto a sus herramientas se usa:  
+      <code>pacman -S grub dhcpcd</code>.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/98e23a58-5f61-4bd9-ac82-bae7b07a0345"/></p>
+    </div>
+    <p>
+      También se puede instalar el <b>GRUB</b> directamente con el comando <code>grub-install /dev/vda</code>, aunque no es necesario usar ambos métodos.  
+      Luego de instalarlo, se debe generar su configuración con  
+      <code>grub-mkconfig -o /boot/grub/grub.cfg</code>.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/34624e05-573c-49f9-b909-cdeb7a970373"/></p>
+    </div>
+    <p>
+      Después de configurar el GRUB, se habilita la red con  
+      <code>systemctl enable NetworkManager</code>.  
+      Si se instaló el GRUB con herramientas, también se puede activar con  
+      <code>systemctl enable dhcpcd</code>.  
+      Luego se instala el <b>entorno gráfico</b> con:  
+      <code>pacman -S xorg xfce4 lightdm lightdm-gtk-greeter</code>.  
+      Este entorno es <b>ligero y eficiente</b>, ideal si no se quiere usar GNOME, que es más pesado.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/a6ff8826-ce11-43dd-82a3-67425a3cab1e"/></p>
+    </div>
+    <p>
+      Ya para finalizar, se habilita el entorno gráfico con <code>systemctl enable lightdm</code>.  
+      Si se desea agregar una <b>contraseña al usuario root</b>, se usa <code>passwd</code>.  
+      Para crear un nuevo usuario:  
+      <code>useradd -m -G wheel &lt;nombre_usuario&gt;</code>,  
+      y para asignarle una contraseña:  
+      <code>passwd &lt;nombre_usuario&gt;</code>.  
+      Finalmente, se sale con <code>exit</code>, se desmonta todo con <code>umount -R /mnt</code> y se reinicia el sistema con <code>reboot</code>.  
+      Al hacerlo, el sistema ya arrancará con el entorno gráfico completamente funcional.
+    </p>
+  </li>
+
+  <li><br>
+    <div align="center">
+      <p><img width=850 src="https://github.com/user-attachments/assets/179a83df-883b-4221-94af-c2e396089b4e"/></p>
+      <p><img width=850 src="https://github.com/user-attachments/assets/16157070-5b5b-4f73-b46f-efe6ba3638e6"/></p>
+    </div>
+    <p>
+      Finalmente, se debería ver la <b>pantalla de inicio de sesión</b> y el <b>entorno gráfico</b> funcionando correctamente.  
+      Aquí aparecen las aplicaciones y configuraciones por defecto del sistema, manteniendo un <b>bajo consumo de recursos</b>.
+    </p>
   </li>
 </ol>
+
